@@ -16,7 +16,14 @@
 - Exact command/result reporting; explicit statement of what was not verified.
 - Stage prompt texts (e.g., Stage 0A through Stage 0C) may be recorded or
   referenced in `docs/PROMPTS.md` **without** including any secrets.
-- Stage 0C established the two private GitHub remotes (HTTPS, owner
-  mohammedawad99) and the `origin` configuration; commits and pushes happen only
+- Stage 0C established the two private GitHub remotes (owner mohammedawad99) and
+  the `origin` configuration (**SSH** transport); commits and pushes happen only
   under explicit reviewer approval, and no authentication output or secret is
   ever recorded here.
+- **Stage 1-SYNC** adopted the reviewed **common** Stage-1 specification baseline by
+  **one-way synchronization** from the Police repository's locked commit
+  `691280dc3219452eeff462c997714fd5bcbd9e55` (documentation only). The specification
+  stages 1A–1D.1 were executed and reviewed **in the Police repository**; this
+  repository did **not** perform that extraction and does not claim to have. The two
+  repositories keep separate Git history, package namespaces (`mars777_thief` here),
+  runtime state, and future strategy. See `SOURCES.md` and `DECISIONS.md` D15.

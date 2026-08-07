@@ -8,6 +8,10 @@
 > **To extract later:** scent values, decay, encoding, and any language rules, with the exact Appendix F numerics.
 > **Note:** No requirement here is approved merely because this file exists.
 > Nothing may be implemented before an approved plan.
+> **Specification status (Stage 1-SYNC):** the authoritative/common Stage-1
+> specification is now **synchronized and LOCKED** in `docs/spec/` (see
+> `../SOURCES.md`). **Substantive PRD work has NOT begun**; this file remains a
+> placeholder until the PRD/architecture phase is authorized.
 
 ## Scope (to be defined)
 

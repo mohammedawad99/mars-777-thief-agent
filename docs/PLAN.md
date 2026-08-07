@@ -12,8 +12,19 @@
 ## Phases (provisional)
 
 - **Stage 0A - Environment audit.** Complete.
-- **Stage 0B - Local foundation.** In progress (this stage).
-- **Stage 1 - Specification extraction** (JSON schemas, rules, numeric values). Pending.
+- **Stage 0B - Local foundation.** Complete (incl. 0B.1 evidence audit).
+- **Stage 0C - Private remote, reviewed initial commit + push, CI verified.** Complete.
+- **Stage 1 - Specification baseline.** **Adopted — REVIEWED / APPROVED / LOCKED.**
+  The common Stage-1 baseline (extraction, Appendix-E/F corrections, requirement
+  traceability, conflict resolutions, four JSON contracts, cryptographic-authentication
+  distinctions, reporting contract) was **synchronized into this repository** from the
+  Police locked source commit `691280dc3219452eeff462c997714fd5bcbd9e55` after
+  supervising review — **not independently re-extracted here** (see `SOURCES.md` →
+  *Synchronization provenance*, and `DECISIONS.md` D15). Lives in `docs/spec/`.
+  **This synchronization is itself pending supervising review before it is committed.**
+  Implementation: **NOT STARTED**.
+- **Stage 2 onwards (PRD/architecture)** begins only **after** this synchronization is
+  reviewed. No substantive PRD work has begun.
 - **Stage 2 - Game logic & movement legality.** Pending (PRD-01).
 - **Stage 3 - Local FastMCP protocol.** Pending (PRD-02).
 - **Stage 4 - Baseline strategy.** Pending (PRD-03).

@@ -9,16 +9,15 @@
 - [x] Stage 0A - environment / tooling / Git / GitHub preflight audit.
 - [x] Stage 0B - local repository foundation.
 - [x] Stage 0B.1 - final evidence audit (exact future-commit validation).
-- [x] Stage 0C - private GitHub repository created under mohammedawad99; HTTPS origin configured.
+- [x] Stage 0C - private GitHub repository created under mohammedawad99; **SSH** origin configured; reviewed initial commit pushed to origin/main.
+- [x] Stage 0C - first GitHub Actions CI run green (ubuntu-latest + windows-latest).
+- [x] Stage 1-SYNC - reviewed COMMON Stage-1 specification baseline **synchronized** from Police locked commit `691280dc…` into `docs/spec/` (documentation only; adopted, not re-extracted here). See `SOURCES.md`, `DECISIONS.md` D15.
 
 ## In progress
-- [ ] Stage 0C - initial commit and push to origin/main (pending at time of writing).
+- [ ] Supervising review of the Stage 1-SYNC synchronization; **then** a separate reviewed commit + push of this documentation. Nothing staged, committed, or pushed in this stage.
 
 ## Pending
-- [ ] First GitHub Actions CI run to complete (ubuntu-latest + windows-latest).
 - [ ] Branch protection / rulesets - deferred until CI check names are known.
-- [ ] Full 160-page source extraction.
-- [ ] JSON specification extraction (four mandatory document types).
 - [ ] Example-simulator review (non-binding).
 - [ ] PRD-01 game logic.
 - [ ] PRD-02 local FastMCP.

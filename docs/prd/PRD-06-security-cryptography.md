@@ -8,6 +8,12 @@
 > **To extract later:** cryptographic algorithms, canonical-JSON serialization rules, and the signature/replay scheme from the book.
 > **Note:** No requirement here is approved merely because this file exists.
 > Nothing may be implemented before an approved plan.
+> **Specification status (Stage 1-SYNC):** the authoritative/common Stage-1
+> specification is now **synchronized and LOCKED** in `docs/spec/` (see
+> `../SOURCES.md`), including the cryptographic taxonomy in
+> `../spec/json/SIGNATURE_AND_HASH_PROVENANCE.md`. **Substantive PRD work has NOT
+> begun**; this file remains a placeholder until the PRD/architecture phase is
+> authorized.
 
 ## Scope (to be defined)
 
