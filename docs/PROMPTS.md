@@ -12,6 +12,10 @@
 | 0B.1 | Final evidence audit and narrow foundation correction | Referenced |
 | 0C | Create private remotes; one reviewed initial commit and push each | Referenced |
 | 1-SYNC | Controlled synchronization of the reviewed COMMON Stage-1 specification baseline from the Police locked commit `691280dc…` into this repository (documentation only; no commit/push) | Referenced |
+| 2A | Architecture freeze and PRD blueprint (21 architecture docs, 7 blueprints) | Referenced |
+| 2A-R | Lecturer reference repository audit + chatbot question pack (read-only) | Referenced |
+| 2A-R2 | Final chatbot/attachment reconciliation; JDEC-014; matrix 77 → 75 | Referenced |
+| 2A-CLOSE | Consistency sweep, commit, push, CI | Referenced |
 
 **Note on Stage 1A–1D.1.** Those specification stages (book extraction, independent
 cross-audit, four JSON contracts, cryptographic/reporting corrections, Stage-1 close)

@@ -25,6 +25,10 @@
   Implementation: **NOT STARTED**.
 - **Stage 2 onwards (PRD/architecture)** begins only **after** this synchronization is
   reviewed. No substantive PRD work has begun.
+- **Stage 2A - Architecture freeze + PRD blueprints.** Complete (documentation only): 21 architecture documents in `docs/architecture/` (system topology, dependency layering, state ownership, state machine, error model, 18 ports, data/privacy flow, concurrency, config, artifacts, strategy seam, LLM boundary, observability, 12 test layers, security threat model, four quality gates, traceability, red-team, sync matrix) + seven PRD **blueprints**. All 91 requirements architecture-mapped; 11 blocking red-team findings resolved.
+- **Stage 2A-R - Lecturer reference audit.** Complete: read-only audit of `rmisegal/Game-P2P-Cop-Chase` @ `960499fd` (v3.0.0). Its bundled book PDF hash matches ours exactly. Reference classified **NON-BINDING**; its unkeyed `SHA256(terms|nonce)` "signature" does **not** satisfy the book's keyed pre-supplied-key requirement (book wins). Chatbot question pack produced.
+- **Stage 2A-R2 - Final reconciliation.** Complete: attachment evidence AE-01…AE-04 recorded as **secondary provenance**; all chatbot items closed (zero pending). Compatibility profiles defined (STRICT / REFERENCE / ATTACHMENT). One authorized Stage-1 **project-contract** correction: **JDEC-014** — the result **references** the declaration instead of duplicating static metadata (four-artifact-set self-containment), so the field matrix moved **77 → 75** (result 13 → 11). No requirement, Appendix E/F value, filename, or conflict changed.
+- **Stage 2A-CLOSE - Consistency sweep + commit.** Stale-baseline sweep, non-self-referential `result_sha256` audit, symmetry re-verification, then commit + push + CI.
 - **Stage 2 - Game logic & movement legality.** Pending (PRD-01).
 - **Stage 3 - Local FastMCP protocol.** Pending (PRD-02).
 - **Stage 4 - Baseline strategy.** Pending (PRD-03).
