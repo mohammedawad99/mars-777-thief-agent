@@ -47,6 +47,9 @@
 | 4F-R1 | Shared protocol value architecture / representation reconciliation | Referenced |
 | 4F-R1-FIX1 | Runtime value-consumer dependency + readiness-accounting hardening | Referenced |
 | 4F-R1-CLOSE | Stage-4F-R1 final contract/accounting audit, tracking, commit, push, CI | Referenced |
+| 4F-RESUME | Sha256Digest + FinalAuditVerdict only - tests first | Referenced |
+| 4F-RESUME-FIX1 | Digest error contract (ValueError) + public surface consistency | Referenced |
+| 4F-CLOSE | Stage-4F final implementation audit, tracking, commit, push, CI | Referenced |
 
 **Note on Stage 1A–1D.1.** Those specification stages (book extraction, independent
 cross-audit, four JSON contracts, cryptographic/reporting corrections, Stage-1 close)
