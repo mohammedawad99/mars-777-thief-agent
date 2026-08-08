@@ -40,6 +40,9 @@
 | 4D | Application port contracts foundation - tests first (BLOCKED before code; no signature guessed) | Referenced |
 | 4D-R1 | Application port architecture reconciliation: 20-port inventory, app.ports dependency policy, signature-freeze policy | Referenced |
 | 4D-R1-CLOSE | Stage-4D-R1 final architecture-diff audit, tracking, commit, push, CI | Referenced |
+| 4E | Protocol semantic message contracts foundation - tests first (BLOCKED before code; two blockers) | Referenced |
+| 4E-R1 | Semantic message architecture / turn-cursor reconciliation: app.peer_messages home, FR-044 scope, 10-family inventory | Referenced |
+| 4E-R1-FIX1 | Turn-cursor consistency + sub-game-control identity reconciliation | Referenced |
 
 **Note on Stage 1A–1D.1.** Those specification stages (book extraction, independent
 cross-audit, four JSON contracts, cryptographic/reporting corrections, Stage-1 close)
