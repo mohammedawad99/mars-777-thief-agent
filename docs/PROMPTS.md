@@ -55,6 +55,7 @@
 | 4E-R2-FIX2 | PRD result-agreement propagation (FR-142/FR-085/FR-190) + TurnCursor fixed-constant dependency reconciliation | Referenced |
 | 4E-RESUME | TurnCursor + Commitment foundation - tests first (the one ready peer-message family) | Referenced |
 | 4E-RESUME-CLOSE | Stage-4E slice final implementation audit, tracking, commit, push, CI | Referenced |
+| 4E-R3 | Acknowledgement + Reveal contract reconciliation: by_role provenance, sealed-action semantics, barrier binding, shared action home | Referenced |
 
 **Note on Stage 1A–1D.1.** Those specification stages (book extraction, independent
 cross-audit, four JSON contracts, cryptographic/reporting corrections, Stage-1 close)
