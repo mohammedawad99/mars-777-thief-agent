@@ -37,6 +37,9 @@
 | 4C | Local orchestrator / protocol guard foundation - tests first (sub-game cursor, one cursor-owned branch) | Referenced |
 | 4C-FIX1 | Supervising correction: counted series is num_games = 6 FIXED, not a floor; bootstrap/constructor audit | Referenced |
 | 4C-CLOSE | Stage-4C final FIXED-series/cursor audit, package-surface alignment, tracking, commit, push, CI | Referenced |
+| 4D | Application port contracts foundation - tests first (BLOCKED before code; no signature guessed) | Referenced |
+| 4D-R1 | Application port architecture reconciliation: 20-port inventory, app.ports dependency policy, signature-freeze policy | Referenced |
+| 4D-R1-CLOSE | Stage-4D-R1 final architecture-diff audit, tracking, commit, push, CI | Referenced |
 
 **Note on Stage 1A–1D.1.** Those specification stages (book extraction, independent
 cross-audit, four JSON contracts, cryptographic/reporting corrections, Stage-1 close)
