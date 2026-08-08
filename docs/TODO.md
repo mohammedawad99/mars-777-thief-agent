@@ -24,14 +24,21 @@
 ### Phase 3 — Deterministic Core Implementation (started)
 - [x] Stage 3A - deterministic domain **foundation** (tests-first): immutable `GridConfig` (project grid minimum enforced here), immutable `Position`, immutable policy-free `Board` geometry with blocked cells, `Move` = N/S/E/W/STAY, stable `MOVE_ORDER`, destination calculation, bounds/blocked legality, deterministic `legal_moves`, typed `apply_move` failure. Role-neutral, no opponent truth, no I/O. **Supervising review PASS.**
 - [x] Stage 3A-CLOSE - final audits, narrow tracking update, commit + push + CI.
+- [x] Stage 3B - deterministic **game semantics** (tests-first): barrier placement, the three capture routes, terminal/survival evaluation, role-keyed scoring and bounded scent physics. **Supervising review PASS.**
+- [x] Stage 3B-FIX1 - supervising correction: **JDEC-015** terminal threshold admissibility (`survival_threshold <= max_moves`) + radial scent-kernel contract hardened; `UnspecifiedTerminalError` removed.
+- [x] Stage 3B-FIX2 - supervising ruling: **C-10** scent state bound vs additive update resolved as the saturating recurrence `min(0.9, max(0, (1-rho)*tau + delta))`.
+- [x] Stage 3B-CLOSE - final audits, tracking finalization, commit + push + CI.
 
 ## In progress
-**Phase 2 — PRD and architecture — is fully complete.** **Phase 3 has started**
-and Stage 3A is closed. Stage 3A is a **foundation only**: no barrier action,
-capture, terminal/survival evaluation, scoring, scent, strategy, protocol,
-networking, cryptography, GUI or reporting code exists. The deterministic core
-is **not** complete. The next stage is tracked once, under Pending.
-
+**Phase 2 — PRD and architecture — is fully complete.** **Phase 3 is under way:**
+Stages 3A and 3B are closed, so the deterministic game-rule layer — movement,
+barriers, capture, terminal/survival, scoring and bounded scent physics — is
+implemented locally and tested. Two implementation-discovered source anomalies
+carry explicit provenance: **JDEC-015** (terminal source gap) and **C-10**
+(scent source conflict). **Not implemented:** turn orchestration, state machine,
+local application service, protocol, networking, cryptography, strategy, belief,
+GUI, replay and reporting. The deterministic core is **not** complete and PRD-01
+remains **IN PROGRESS**. The next stage is tracked once, under Pending.
 ## Pending
 - [ ] Branch protection / rulesets - **blocked**: unavailable on the current GitHub
       plan for private repos (Stage 0D). Needs Pro upgrade, org, or public-at-submission.
@@ -44,7 +51,8 @@ is **not** complete. The next stage is tracked once, under Pending.
 - [x] PRD-06 security & cryptography - authored and locked; implementation not started.
 - [x] PRD-07 reporting, GUI, replay - authored and locked; implementation not started.
 - [x] **Phase 3 — Deterministic Core Implementation** — **STARTED** (Stage 3A closed; the phase itself is **not** complete).
-- [ ] **Stage 3B — Deterministic Game Semantics** — **NEXT AUTHORIZED; NOT STARTED.** Planned ownership: barrier placement semantics, capture conditions, survival/terminal evaluation, scoring, deterministic scent physics.
+- [x] **Stage 3B — Deterministic Game Semantics** — **CLOSED** (barriers, capture, terminal/survival, scoring, bounded scent physics).
+- [ ] **Stage 3C — Local Application / Turn Orchestration Foundation** — **NEXT AUTHORIZED; NOT STARTED.** Planned: consume the validated domain primitives; a local turn command/application service; explicit action choice (move **or** barrier); local state ownership; deterministic transition/result objects. **No** public networking and **no** cryptography.
 - [ ] Collaborator (Rawey7) access - pending explicit instruction.
 
 _Phases 1 and 2 are specification and requirements only; all seven PRDs remain
