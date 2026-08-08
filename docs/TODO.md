@@ -36,7 +36,7 @@ is **not** complete. The next stage is tracked once, under Pending.
 - [ ] Branch protection / rulesets - **blocked**: unavailable on the current GitHub
       plan for private repos (Stage 0D). Needs Pro upgrade, org, or public-at-submission.
 - [ ] Example-simulator review (non-binding).
-- [x] PRD-01 game logic - authored and locked; implementation not started.
+- [x] PRD-01 game logic - authored and locked; implementation **IN PROGRESS** (Stage 3A foundation only; barriers, capture, terminal/survival, scoring and scent still pending).
 - [x] PRD-02 local FastMCP - authored and locked; implementation not started.
 - [x] PRD-03 baseline strategy (**THIEF** role-specific) - authored and locked; implementation not started.
 - [x] PRD-04 language & scent - authored and locked; implementation not started.
