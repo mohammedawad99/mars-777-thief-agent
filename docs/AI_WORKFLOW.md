@@ -27,3 +27,8 @@
   repository did **not** perform that extraction and does not claim to have. The two
   repositories keep separate Git history, package namespaces (`mars777_thief` here),
   runtime state, and future strategy. See `SOURCES.md` and `DECISIONS.md` D15.
+- **Phase 2 (Stages 2A → 2-CLOSE)** froze the architecture and authored all seven PRDs.
+  Stage 2-CLOSE resolved the two final cross-contract issues **without changing any locked
+  contract**: the series convention is negotiated protocol metadata (not a declaration field)
+  and the declared MCP endpoint is a stable group-level ingress. **PRD-01…07 are
+  APPROVED — PHASE 2 LOCKED; implementation has NOT started.**
