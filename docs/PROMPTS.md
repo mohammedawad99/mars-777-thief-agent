@@ -64,6 +64,8 @@
 | 4E-R4-CLOSE | Shared physical-action reconciliation final audit, tracking, commit, push, CI | Referenced |
 | 4E-R5 | Shared physical-action foundation + LocalTurnService migration - tests first, impact-scan-derived scope | Referenced |
 | 4E-R5-CLOSE | Physical-action migration final audit, Reveal readiness, tracking, commit, push, CI | Referenced |
+| 4E-RESUME3 | Reveal foundation - tests first (the third peer-message family) | Referenced |
+| 4E-RESUME3-CLOSE | Reveal final audit, module-capacity ruling, tracking, commit, push, CI | Referenced |
 
 **Note on Stage 1A–1D.1.** Those specification stages (book extraction, independent
 cross-audit, four JSON contracts, cryptographic/reporting corrections, Stage-1 close)
