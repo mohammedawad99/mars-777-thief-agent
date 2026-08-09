@@ -80,6 +80,8 @@
 | 4E-R9-R1-CLOSE | Semantic prerequisites final audit, tracking, commit, push, CI | Referenced |
 | 4E-R9-R2 | Sealed record semantic values foundation - ActorRole, Intent and SealedState, tests first | Referenced |
 | 4E-R9-R2-CLOSE | Sealed record semantic values final audit, tracking, commit, push, CI | Referenced |
+| 4E-R9-RESUME | Canonical commitment codec + recompute foundation - tests first, fixed known-answer vectors | Referenced |
+| 4E-R9-RESUME-CLOSE | Codec final audit, narrow architecture correction, tracking, commit, push, CI | Referenced |
 
 **Note on Stage 1A–1D.1.** Those specification stages (book extraction, independent
 cross-audit, four JSON contracts, cryptographic/reporting corrections, Stage-1 close)
