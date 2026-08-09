@@ -82,6 +82,9 @@
 | 4E-R9-R2-CLOSE | Sealed record semantic values final audit, tracking, commit, push, CI | Referenced |
 | 4E-R9-RESUME | Canonical commitment codec + recompute foundation - tests first, fixed known-answer vectors | Referenced |
 | 4E-R9-RESUME-CLOSE | Codec final audit, narrow architecture correction, tracking, commit, push, CI | Referenced |
+| 4E-R10 | Final audit + move validation readiness reconciliation | Referenced |
+| 4E-R10-R1 | Final-audit inventory + audit-material exchange reconciliation | Referenced |
+| 4E-R10-R1-CLOSE | Final-audit inventory final audit, tracking, commit, push, CI | Referenced |
 
 **Note on Stage 1A–1D.1.** Those specification stages (book extraction, independent
 cross-audit, four JSON contracts, cryptographic/reporting corrections, Stage-1 close)
