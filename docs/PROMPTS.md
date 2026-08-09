@@ -59,6 +59,9 @@
 | 4E-RESUME2 | Acknowledgement foundation - tests first (the second ready peer-message family) | Referenced |
 | 4E-RESUME2-FIX1 | Clean-parent TDD replay + scope reconciliation after an interrupted attempt left an unclean preflight and a reconstructed RED | Referenced |
 | 4E-RESUME2-CLOSE | Acknowledgement slice final implementation audit, tracking, commit, push, CI | Referenced |
+| 4E-RESUME2-CLOSE-FIX1 | External Claude-memory boundary audit and narrow repair (repositories untouched) | Referenced |
+| 4E-R4 | Shared physical action + canonical move representation reconciliation: action home, type model, turn_service migration, sealed `move` encoding | Referenced |
+| 4E-R4-CLOSE | Shared physical-action reconciliation final audit, tracking, commit, push, CI | Referenced |
 
 **Note on Stage 1A–1D.1.** Those specification stages (book extraction, independent
 cross-audit, four JSON contracts, cryptographic/reporting corrections, Stage-1 close)
