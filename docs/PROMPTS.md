@@ -106,5 +106,10 @@ them. See `SOURCES.md` → *Synchronization provenance*.
 | 4E-R12-R3 | Token-budget agreement chronology reconciliation | Referenced |
 | 4E-R12-CLOSE | Pre-match contract final audit, tracking, commit, push, exact-SHA CI | Referenced |
 
+| 4E-R13 | ResultAgreement payload + result artifact reconciliation | Referenced |
+| 4E-R13-R1 | Result approval core joint-derivability reconciliation | Referenced |
+| 4E-R13-R2 | Result timestamp carriage + deterministic agreement cadence reconciliation | Referenced |
+| 4E-R13-CLOSE | ResultAgreement + joint result core final audit, tracking, commit, push, exact-SHA CI | Referenced |
+
 The full prompt texts may be pasted here later if the reviewer approves; they
 contain no secrets.
