@@ -85,6 +85,9 @@
 | 4E-R10 | Final audit + move validation readiness reconciliation | Referenced |
 | 4E-R10-R1 | Final-audit inventory + audit-material exchange reconciliation | Referenced |
 | 4E-R10-R1-CLOSE | Final-audit inventory final audit, tracking, commit, push, CI | Referenced |
+| 4E-R10-R2 | MoveValidation existence + payload reconciliation | Referenced |
+| 4E-R10-R3 | Move-rejection inventory + transport-response reconciliation | Referenced |
+| 4E-R10-R3-CLOSE | Move-rejection reconciliation tracking, commit, push, CI | Referenced |
 
 **Note on Stage 1A–1D.1.** Those specification stages (book extraction, independent
 cross-audit, four JSON contracts, cryptographic/reporting corrections, Stage-1 close)
