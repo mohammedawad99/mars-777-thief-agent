@@ -90,6 +90,8 @@
 | 4E-R10-R3-CLOSE | Move-rejection reconciliation tracking, commit, push, CI | Referenced |
 | 4E-R11 | Peer operation + transport contract reconciliation | Referenced |
 | 4E-R11-CLOSE | Peer operation contract tracking, commit, push, CI | Referenced |
+| 4E-R11-R1 | Log artifact interoperability + audit exchange reconciliation | Referenced |
+| 4E-R11-R1-CLOSE | Audit log interoperability final audit, payload-core guard, tracking, commit, push, CI | Referenced |
 
 **Note on Stage 1A–1D.1.** Those specification stages (book extraction, independent
 cross-audit, four JSON contracts, cryptographic/reporting corrections, Stage-1 close)
