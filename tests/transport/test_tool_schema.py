@@ -10,7 +10,7 @@ import asyncio
 import pytest
 from fastmcp import Client
 from fastmcp.exceptions import ToolError
-from peer_ops import RecordingOperations
+from peer_recorder import RecordingOperations
 
 from mars777_thief.transport.envelopes import TOOL_KINDS
 from mars777_thief.transport.server import PEER_TOOLS, build_server
