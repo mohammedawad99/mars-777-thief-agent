@@ -25,6 +25,7 @@ from mars777_thief.app.sealed_record_values import ActorRole
 from mars777_thief.app.series_audit_gate import SeriesAuditGate
 from mars777_thief.app.step0_runtime import Step0Runtime
 from mars777_thief.app.turn_protocol_runtime import TurnProtocolRuntime
+from mars777_thief.domain.scent_model_default import default_scent_model
 from mars777_thief.protocol.audit_commitment import CommitmentRecomputer
 from mars777_thief.protocol.config_lock import ConfigLockAuthenticator
 from mars777_thief.protocol.declaration import Step0Authenticator
@@ -40,7 +41,9 @@ def pregame_for(group_id: str, slot: str) -> PregameSessionRuntime:
     budget = config().network_and_league.token_budget_per_series
     return PregameSessionRuntime(
         Step0Runtime(group_id, Step0Authenticator(authenticator())),
-        ConfigNegotiationRuntime(group_id, SUB_GAME, budget, PROFILES),
+        ConfigNegotiationRuntime(
+            group_id, SUB_GAME, budget, PROFILES, shared, default_scent_model()
+        ),
         ConfigLockRuntime(GAME_ID, GAME_UID, SUB_GAME, PROFILES, shared, shared),
         partial(group_id, COMMIT_A, slot),
     )
