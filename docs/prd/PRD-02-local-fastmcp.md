@@ -1,11 +1,11 @@
-# PRD-02 — Local FastMCP and Orchestration — group MaRs-777 (THIEF)
+# PRD-02 — Local FastMCP and Orchestration — group MaRs-777 (POLICE)
 
 ## 1. Document Metadata
 
 | Field | Value |
 |---|---|
 | PRD | PRD-02 — Local FastMCP & Orchestration |
-| Repository role | **THIEF** |
+| Repository role | **POLICE** |
 | Owns | `app.*` (orchestrator, state machine, turn service, ports) and `infra.mcp_server`, `infra.mcp_client`, `infra.gatekeeper`, `infra.clock`, `infra.series_launcher` |
 | Architecture inputs | `SYSTEM_ARCHITECTURE.md`, `STATE_MACHINE.md`, `CONCURRENCY_MODEL.md`, `API_BOUNDARIES.md`, `DEPENDENCY_RULES.md`, `ERROR_MODEL.md` |
 | Symmetry class | **COMMON-WITH-ROLE-SECTIONS** (only §7/§13.2 role identity differs) |
@@ -15,7 +15,11 @@
 **APPROVED — PHASE 2 LOCKED.** Approved after Stage 2-CLOSE supervising review.
 The requirements below are unchanged by implementation progress.
 
-**Implementation status: IN PROGRESS.**
+**Implementation status: LOCAL FASTMCP / TWO-AGENT TRANSPORT IMPLEMENTED-E2E.**
+The four tools, nine wire kinds, strict DTOs, inbound routing, outbound client
+and typed error mapping are implemented and exercised by real two-agent
+localhost runs. Driving a full autonomous game over that transport is **outside
+this PRD** and is not yet implemented anywhere.
 
 **Completed implementation slice:** Stage 3C — Local Application / Turn
 Orchestration Foundation: `LocalTruth` (board, own position, completed steps);
@@ -63,7 +67,7 @@ reporting, GUI, replay (**PRD-07**).
 
 ## 7. Actors
 
-This **THIEF** agent process · the opponent peer (untrusted, TB-1) · the local
+This **POLICE** agent process · the opponent peer (untrusted, TB-1) · the local
 operator (starts/stops the runtime; may run the `SeriesLauncher`) · the domain
 (PRD-01) · the strategy plug-in (PRD-03).
 

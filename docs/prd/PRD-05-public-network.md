@@ -1,11 +1,11 @@
-# PRD-05 — Public Network and Tunnel — group MaRs-777 (THIEF)
+# PRD-05 — Public Network and Tunnel — group MaRs-777 (POLICE)
 
 ## 1. Document Metadata
 
 | Field | Value |
 |---|---|
 | PRD | PRD-05 — Public Network & Tunnel |
-| Repository role | **THIEF** |
+| Repository role | **POLICE** |
 | Owns | Public reachability, tunnel lifecycle, endpoint identity/exchange, network readiness gate, series-convention agreement, connectivity failure semantics |
 | Architecture inputs | `SYSTEM_ARCHITECTURE.md` §3 (TB-1), `CONCURRENCY_MODEL.md` §4, `SECURITY_ARCHITECTURE.md` T8/T15, `API_BOUNDARIES.md` (`PeerTransportPort`, `PeerServerPort`) |
 | Symmetry class | **COMMON-WITH-ROLE-SECTIONS** (role identity only) |
@@ -13,7 +13,16 @@
 ## 2. Status
 
 **APPROVED — PHASE 2 LOCKED.** Approved after Stage 2-CLOSE supervising review.
-**Implementation status: NOT STARTED.** No code, no dependency, no provider chosen.
+**Implementation status: IMPLEMENTED-INTEGRATED / LIVE E2E PROOF PENDING.**
+The public-ingress path exists and is unit- and integration-tested:
+`infra/ngrok_ingress.py`, `infra/ngrok_process.py`, `infra/agent_api.py`
+(strict parsing measured against the installed agent), `app/public_ingress.py`,
+`app/public_endpoint_binding.py`, `app/public_readiness_gate.py` and
+`app/public_network_workflow.py`, behind the provider-neutral
+`PublicIngressPort`. **No remote end-to-end run has been demonstrated:** the
+live suite is skipped unless `MARS777_RUN_LIVE_NGROK=1` is set and the agent is
+installed, which is why all 13 of those tests are reported as skipped. Public
+network play must not be claimed as proven until that suite runs green.
 
 ## 3. Purpose
 
@@ -44,7 +53,7 @@ cryptographic message validity, peer authentication (**PRD-06**) · game rules
 
 ## 7. Actors
 
-This **THIEF** agent · the opponent peer (untrusted) · the tunnel provider
+This **POLICE** agent · the opponent peer (untrusted) · the tunnel provider
 (untrusted infrastructure) · the local operator (provisions credentials) · `SeriesLauncher`
 (PRD-02, operational only).
 

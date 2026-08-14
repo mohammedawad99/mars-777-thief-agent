@@ -1,11 +1,11 @@
-# PRD-06 — Security and Cryptography — group MaRs-777 (THIEF)
+# PRD-06 — Security and Cryptography — group MaRs-777 (POLICE)
 
 ## 1. Document Metadata
 
 | Field | Value |
 |---|---|
 | PRD | PRD-06 — Security & Cryptography (**HIGH-RISK**) |
-| Repository role | **THIEF** |
+| Repository role | **POLICE** |
 | Owns | `protocol.canonical`, `protocol.commitment`, `protocol.keyed_auth`, `protocol.config_lock`, `protocol.declaration`, `protocol.profiles`, secret handling in `infra.settings` |
 | Architecture inputs | `SECURITY_ARCHITECTURE.md`, `../spec/json/SIGNATURE_AND_HASH_PROVENANCE.md`, `CANONICALIZATION_CONTRACT.md`, `ARTIFACT_LIFECYCLE.md`, `ERROR_MODEL.md` |
 | Symmetry class | **COMMON-WITH-ROLE-SECTIONS** (role identity only; crypto is identical) |
@@ -13,7 +13,19 @@
 ## 2. Status
 
 **APPROVED — PHASE 2 LOCKED.** Approved after Stage 2-CLOSE supervising review.
-**Implementation status: NOT STARTED.** No code, **no crypto package added**.
+**Implementation status: IMPLEMENTED-E2E.** The cryptographic chain this PRD
+owns is implemented and covered end to end: canonical hashed bytes
+(`protocol/canonical.py`, kept separate from the wire/artifact decimal spelling
+authority), the sealed **eight**-member record, SHA-256 commitment
+(`protocol/commitment.py`) and its recomputation
+(`protocol/audit_commitment.py`), a CSPRNG nonce source
+(`protocol/secure_nonce.py`) held secret until the final nonce reveal, keyed
+Step-0 and config authentication (`protocol/keyed_auth.py`,
+`protocol/config_lock.py`), `TAMPERED` on any recomputed-hash mismatch, and the
+`config_sha256` / `scent_model_sha256` digest binding — all pinned by golden
+vectors. No third-party crypto dependency was added; the standard library
+provides SHA-256 and HMAC. **Physical scent truthfulness is deliberately not
+part of this status** — it is authorized as JDEC-018 and scheduled for Part 2B.
 
 ## 3. Purpose
 
@@ -47,7 +59,7 @@ Game strategy (PRD-03) · public tunnel lifecycle (PRD-05) · Gmail sending and 
 
 ## 7. Actors
 
-This **THIEF** agent (producer/verifier) · the opponent peer (untrusted producer and
+This **POLICE** agent (producer/verifier) · the opponent peer (untrusted producer and
 verifier) · the replay verifier (PRD-07, which **calls this PRD's interfaces**) · the local
 operator (provisions the pre-supplied key out of band).
 
