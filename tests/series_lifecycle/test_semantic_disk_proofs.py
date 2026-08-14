@@ -50,7 +50,9 @@ TRAP = steps_of(
 """Walk off the corner, then close both of the thief's ways out (GAME-005)."""
 
 
-async def play(a: SeriesRuntime, b: SeriesRuntime, steps: tuple[Step, ...]) -> list[CaptureAnswer]:
+async def play(
+    a: SeriesRuntime, b: SeriesRuntime, steps: tuple[Step, ...], legal: bool = True
+) -> list[CaptureAnswer]:
     """One real sub-game of police turns, closed and written by production."""
     answers: list[CaptureAnswer] = []
     async with live.started(a, b):
@@ -64,9 +66,15 @@ async def play(a: SeriesRuntime, b: SeriesRuntime, steps: tuple[Step, ...]) -> l
         cell, truth, walls = COP, None, ()
         for step, (action, claim) in enumerate(steps, start=1):
             cursor = TurnCursor(1, step)
-            a.composition.runtime_context.bind_turn(r7.turn_for(POLICE, cursor))
+            a.composition.runtime_context.bind_turn(
+                r7.turn_for(POLICE, cursor, r7.own_truth(cell, walls))
+            )
             b.composition.runtime_context.bind_turn(r7.turn_for(THIEF, cursor, truth))
-            outcome = await r7.one_turn(a, b, POLICE, cursor, action, claim, cell, walls)
+            outcome = (
+                await r7.one_turn(a, b, POLICE, cursor, action, claim, cell, walls)
+                if legal
+                else await r7.one_unvalidated_turn(a, b, POLICE, cursor, action, cell, walls)
+            )
             answers.append(outcome.capture)
             cell, walls = r7.moved(cell, action), r7.placed(walls, action)
             truth = b.composition.runtime_context.current_turn().truth
@@ -81,10 +89,12 @@ async def play(a: SeriesRuntime, b: SeriesRuntime, steps: tuple[Step, ...]) -> l
     return answers
 
 
-def run(root: Path, steps: tuple[Step, ...]) -> tuple[dict[str, object], list[CaptureAnswer]]:
+def run(
+    root: Path, steps: tuple[Step, ...], legal: bool = True
+) -> tuple[dict[str, object], list[CaptureAnswer]]:
     """Play the case and return the police's official log, read back from disk."""
     a, b = live.pair_for(root)
-    answers = asyncio.run(play(a, b, steps))
+    answers = asyncio.run(play(a, b, steps, legal))
     written = root / "police" / log_name(GAME_ID, 1)
     return json.loads(written.read_text(encoding="utf-8")), answers
 
@@ -142,14 +152,18 @@ def test_a_false_declaration_is_written_and_replays_as_the_claimant_s_fault(
 
 
 def test_a_barrier_on_the_thief_cell_is_written_as_caught(tmp_path: Path) -> None:
-    log, answers = run(tmp_path, steps_of((BarrierAction(HIDDEN), None)))
+    """Placement is the police's action, which this repository's own service
+    refuses to execute locally, so the police side is driven as a peer that does
+    not self-validate - the receiver and the audit are what this proves."""
+    log, answers = run(tmp_path, steps_of((BarrierAction(HIDDEN), None)), legal=False)
     assert answers == [CaptureAnswer.CAUGHT]
     assert transcript(log) == [(None, "CAUGHT")]
     assert semantic(log)["verdict"] == SemanticVerdict.CONSISTENT.value
 
 
 def test_the_barrier_that_closes_the_last_way_out_is_written_as_caught(tmp_path: Path) -> None:
-    log, answers = run(tmp_path, TRAP)
+    """Same reason as the barrier case above: placement is not this role's move."""
+    log, answers = run(tmp_path, TRAP, legal=False)
     assert answers == [CaptureAnswer.NO_QUESTION] * 2 + [CaptureAnswer.CAUGHT]
     assert transcript(log) == [(None, "NO_QUESTION"), (None, "NO_QUESTION"), (None, "CAUGHT")]
     assert semantic(log)["verdict"] == SemanticVerdict.CONSISTENT.value
@@ -158,9 +172,14 @@ def test_the_barrier_that_closes_the_last_way_out_is_written_as_caught(tmp_path:
 def test_an_illegal_move_is_written_as_a_technical_loss_with_verified_evidence(
     tmp_path: Path,
 ) -> None:
-    """North from row 0 leaves the board: honest record, illegal game action."""
+    """North from row 0 leaves the board: honest record, illegal game action.
+
+    Sent through the unvalidated-peer harness, because a production sender now
+    refuses its own illegal action before sealing anything - which is exactly
+    why the semantic audit has to keep working against a peer that does not.
+    """
     a, b = live.pair_for(tmp_path)
-    asyncio.run(play(a, b, steps_of((MoveAction(Move.N), None))))
+    asyncio.run(play(a, b, steps_of((MoveAction(Move.N), None)), legal=False))
     log = json.loads((tmp_path / "police" / log_name(GAME_ID, 1)).read_text(encoding="utf-8"))
     audit = log["audit"]
     (line,) = a.lines

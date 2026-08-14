@@ -22,6 +22,7 @@ from mars777_thief.app.protocol_errors import LocalDefectError
 from mars777_thief.app.sealed_record_values import ActorRole, Intent
 from mars777_thief.domain.actions import BarrierAction, PhysicalAction
 from mars777_thief.domain.board import Board, Position
+from mars777_thief.domain.scent_observation import emission_of
 
 
 @pytest.fixture
@@ -52,6 +53,33 @@ async def play(
     await b.runner(b_to_a).acknowledge_peer_turn()
     assert a.turn.capture.outbound == (), "nothing may be recorded before the answer arrives"
     return await runner.reveal_turn(prepared)
+
+
+async def play_unvalidated(a: object, b: object, action: PhysicalAction) -> object:
+    """One turn from a peer that does not validate its own action first.
+
+    A barrier is the police's action and this repository's `LocalTurnService`
+    refuses to execute one, so `open_turn` - which now projects this turn's scent
+    before sealing anything - cannot drive these cases here. The transcript and
+    the peer's answer are what they prove, so the turn is sealed through the real
+    evidence owner and sent over the real transport instead.
+    """
+    a_to_b = await step0_on(a, b.url)
+    b_to_a = await step0_on(b, a.url)
+    truth = a.turn.truth
+    model = a.pregame.lock.scent_model
+    prepared = a.producer.prepare_turn(
+        state=sealed(ActorRole.POLICE),
+        action=action,
+        intent=Intent.TRUTH,
+        hint="closing in",
+        cursor=CURSOR,
+        scent=emission_of(truth.board, model.kernel, truth.own_position, model.params),
+    )
+    a.turn.register_local_commitment(prepared.commitment)
+    await a_to_b.send_commitment(prepared.commitment)
+    await b.runner(b_to_a).acknowledge_peer_turn()
+    return await a.runner(a_to_b).reveal_turn(prepared)
 
 
 def turn(a: object, b: object, action: PhysicalAction, claim: Position | None = None) -> object:
@@ -94,7 +122,7 @@ def test_a_false_declaration_is_retained_with_the_cell_that_was_declared(pair: t
 def test_a_barrier_on_the_thief_cell_is_retained_without_any_claim(pair: tuple) -> None:
     a, b = pair
     here = b.turn.truth.own_position
-    outcome = turn(a, b, BarrierAction(here))
+    outcome = asyncio.run(play_unvalidated(a, b, BarrierAction(here)))
     assert outcome.capture is CaptureAnswer.CAUGHT
     expect(a, b, CaptureAnswer.CAUGHT)
 
@@ -111,7 +139,7 @@ def test_the_barrier_that_closes_the_last_escape_is_retained_as_caught(pair: tup
         own_position=here,
         completed_steps=0,
     )
-    outcome = turn(a, b, BarrierAction(ways_out[-1]))
+    outcome = asyncio.run(play_unvalidated(a, b, BarrierAction(ways_out[-1])))
     assert outcome.capture is CaptureAnswer.CAUGHT
     expect(a, b, CaptureAnswer.CAUGHT)
 
