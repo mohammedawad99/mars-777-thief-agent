@@ -11,6 +11,19 @@
 
 ## 2. Status
 
+**Implementation status: BASELINE IMPLEMENTED (Stage 6B).** Live in
+`domain/observation.py`, `domain/reachability.py`, `app/strategy_api.py` and
+`app/baseline_strategy.py`: a deterministic, LLM-free, belief-free, scent-free
+thief baseline behind the documented `StrategyPort`, returning `MoveAction` and
+structurally unable to return a `BarrierAction`. No dependency was added and no
+existing module was modified. It is **not yet wired into a game owner** — that is
+Stage 6C.
+
+**Nothing here is deleted.** Requirements presupposing belief, plug-in loading,
+seeded randomness, a decision time-box or a self-play benchmark are retained and
+marked **DEFERRED — BELIEF / COMPETITIVE STRATEGY STAGE**; they remain the
+long-term contract and are simply not Stage-6B acceptance criteria.
+
 **APPROVED — PHASE 2 LOCKED.** Approved after Stage 2-CLOSE supervising review.
 **Implementation status: NOT STARTED.** No code. No dependency.
 
@@ -105,13 +118,52 @@ lie**, but its classification MUST be truthful · optional confidence/diagnostic
 | ID | Requirement | Traces to |
 |---|---|---|
 | **PRD03-FR-001** | The strategy is a replaceable plug-in satisfying `StrategyPort`; replacing it requires **no change** to networking, cryptography, persistence, GUI, or reporting. | STRAT-001; `STRATEGY_ARCHITECTURE.md` |
-| **PRD03-FR-002** | It accepts only an `Observation` and returns only a `ProposedAction`. | `API_BOUNDARIES.md` P1 |
+| **PRD03-FR-002** | It accepts only an `Observation` and returns only a proposed action. *Stage 6B: satisfied with a bare `MoveAction`, narrowing the port's `PhysicalAction`; `ProposedAction` reserved for PRD-04 (see §12).* | `API_BOUNDARIES.md` P1 |
 | **PRD03-FR-003** | It MUST NOT send network messages, write artifacts, touch nonce/hash material, mutate authoritative state, or bypass validation. | `DEPENDENCY_RULES.md` §3 |
 | **PRD03-FR-004** | The spatial/movement decision is **fully algorithmic** in all modes. | **STRAT-002**, GAME-009 |
-| **PRD03-FR-005** | The plug-in is selected by configuration (dotted path); an unknown/unloadable plug-in fails start-up rather than silently falling back. | REFERENCE-COMPATIBILITY (D-13) |
+| **PRD03-FR-005** | **DEFERRED — BELIEF / COMPETITIVE STRATEGY STAGE.** The plug-in is selected by configuration (dotted path). *App F Table 22 declares itself "a reference table only — the choice is private to each peer and is not subject to negotiation", so this is a reference pattern, not a source mandate. One strategy exists; a loader with nothing to choose between waits for the second.* | REFERENCE-COMPATIBILITY (D-13) |
 | **PRD03-FR-006** | The strategy MUST NOT propose a barrier action — barrier placement is police-only. | BAR-004 (police-only) |
 
 ### 13.2 Thief baseline policy
+
+> **DEFERRED — BELIEF / COMPETITIVE STRATEGY STAGE:** `PRD03-FR-011`,
+> `PRD03-FR-012`, `PRD03-FR-013`, `PRD03-FR-014`, `PRD03-FR-018`,
+> `PRD03-FR-019`. Each needs a believed police cell or the threat region derived
+> from one, and belief's evidence — scent and hints — arrives at PRD-04. Ch 10
+> §10.3.3 puts a **blind** strategy at this stage.
+>
+> **In force at Stage 6B.** `FR-006` **implemented and strengthened**: the
+> baseline's return type is `MoveAction`, so a placement is not merely refused
+> but unconstructible. `FR-010` implemented — candidates come from `legal_moves`
+> alone. `FR-015` (mobility guard) **implemented**, and it is the operative
+> discriminator: the thief takes the destination with the larger barrier-aware
+> reachable region and, among equals, more onward legal moves. `FR-020` holds —
+> no outcome is asserted.
+>
+> **`FR-016` (escape-room preservation) is implemented but measurably inert, and
+> that is recorded rather than glossed.** Every candidate destination is either
+> this actor's own cell or one orthogonally adjacent to it, so whenever the
+> actor stands somewhere traversable all candidates belong to the **same**
+> connected component and the region term scores them identically — verified
+> across 3,209 randomly generated candidate sets at Stage 6B, in which the term
+> differed **zero** times. The term is correct and does separate genuinely
+> disconnected regions; it simply cannot be reached from a single actor's own
+> move set. Making it bite needs the *look-ahead* form — the survivable region
+> still available after **threat-conditioned or likely** opponent replies — which
+> belongs with the threat region it was designed to work alongside. **Deferred
+> with the belief group** by supervising decision at Stage 6B-C, which kept the
+> Stage-6B implementation unchanged rather than swapping the objective during a
+> closure. Two things that refinement will **not** do: it will not read the
+> police's true position, and it will not gain one — it conditions on *belief*
+> and on the threat region derived from legally available evidence, exactly as
+> `FR-012` requires. **No claim is made that escape-room optimisation is already
+> competitive**; in Stage 6B it is present in baseline form only.
+>
+> **`FR-017` (corner/edge penalty) is deliberately not implemented as a separate
+> rule.** An edge cell has fewer onward moves and a corner fewer still, so the
+> mobility term already expresses it; a second rule saying the same thing is a
+> rule that can disagree with the first. Revisit only if measurement shows
+> mobility alone is insufficient.
 
 | ID | Requirement | Traces to |
 |---|---|---|
@@ -132,22 +184,22 @@ lie**, but its classification MUST be truthful · optional confidence/diagnostic
 | ID | Requirement | Traces to |
 |---|---|---|
 | **PRD03-FR-030** | Given identical strategy profile, seed and `Observation`, the returned `ProposedAction` is identical on Linux and Windows. | cross-OS |
-| **PRD03-FR-031** | Randomness, if any, comes **only** from a seeded RNG owned by the strategy; no global or wall-clock randomness. | determinism |
-| **PRD03-FR-032** | The seed is supplied via local settings and **recorded as replay evidence**. | REPLAY-001/002 |
-| **PRD03-FR-033** | **Tie-break order (total and deterministic):** (1) higher destination mobility; (2) larger escape-room size; (3) greater barrier-aware distance to the belief mode; (4) smaller corner/edge penalty; (5) fixed action order `N, E, S, W, STAY`; (6) lexicographically smaller destination `[row, col]`. Exactly one action results. | determinism |
+| **PRD03-FR-031** | **DEFERRED — BELIEF / COMPETITIVE STRATEGY STAGE** (constraint retained, not yet exercised). Randomness, if any, comes **only** from a seeded RNG owned by the strategy. *The Stage-6B baseline draws no randomness at all, so no RNG owner exists to seed.* | determinism |
+| **PRD03-FR-032** | **DEFERRED — BELIEF / COMPETITIVE STRATEGY STAGE.** The seed is supplied via local settings and **recorded as replay evidence**. *No seed exists while the policy is deterministic.* | REPLAY-001/002 |
+| **PRD03-FR-033** | **Tie-break order (total and deterministic):** (1) larger barrier-aware reachable region; (2) higher destination mobility; (3) the existing `domain.rules.MOVE_ORDER`, which is **`N, S, E, W, STAY`**. *Corrected at Stage 6B on two counts: the action order previously read `N, E, S, W, STAY`, which never matched the implemented, unit-tested `MOVE_ORDER` — production wins; and region now precedes mobility, per the Stage-6A ruling. The two orderings are behaviourally identical while the region term ties (see §13.2). The belief-mode distance and corner/edge terms are deferred with their groups.* The order is total because candidates are a subset of the five `Move` values, each occurring once. | determinism; `PRD-01` §19 |
 | **PRD03-FR-034** | No decision may depend on Python hash randomization, set iteration order, or dict insertion order; collections are canonically sorted before iteration. | cross-OS |
 
 ### 13.4 Time-boxing, fallback and failure
 
 | ID | Requirement | Traces to |
 |---|---|---|
-| **PRD03-FR-040** | The decision is time-boxed strictly inside the negotiated `response_timeout_sec` (config-sourced; App F default 30 s, NEGOTIABLE). | STATE-004; PRD-02 |
-| **PRD03-FR-041** | **Fallback order** on timeout, invalid proposal, empty candidate set, or internal exception: (1) best action found so far if legal; (2) the legal move with maximum destination mobility; (3) the first legal action in fixed order `N, E, S, W`; (4) `STAY` if it is the only legal action. | measurable ordering |
+| **PRD03-FR-040** | **DEFERRED — BELIEF / COMPETITIVE STRATEGY STAGE.** The decision is time-boxed strictly inside `response_timeout_sec`. *App F T16 #6's 30 s is a timeout "for each network request", not a decision budget; the source defines none. Measured Stage-6B p95 is ~0.5 ms.* | STATE-004; PRD-02 |
+| **PRD03-FR-041** | **DEFERRED — BELIEF / COMPETITIVE STRATEGY STAGE.** The fallback ladder. *Every rung presupposes a fallible strategy. The Stage-6B baseline is total and deterministic, selecting only from `legal_moves`, so its only failure mode is an empty candidate set — a **terminal** the caller settles first (App E #47, and `FR-045` below). Unreachable rungs are untestable dead code. Its action order must be corrected to `MOVE_ORDER` when it lands.* | measurable ordering |
 | **PRD03-FR-042** | A strategy failure MUST degrade to a deterministic legal fallback and MUST NOT bypass the validator. | GAME-009 |
 | **PRD03-FR-043** | A strategy failure MUST NOT mutate authoritative domain state. | `DEPENDENCY_RULES.md` |
 | **PRD03-FR-044** | If the optional LLM (PRD-04) is unavailable or unusable, movement is unaffected. | LLM-001; T0 viability |
-| **PRD03-FR-045** | If the candidate set is empty, the strategy returns no action and the **domain** declares the GAME-005 terminal; the strategy never self-declares capture. | **GAME-005** |
-| **PRD03-FR-046** | Every fallback activation is recorded with its reason. | `OBSERVABILITY.md` |
+| **PRD03-FR-045** | **IMPLEMENTED.** If the candidate set is empty the strategy returns no action and the **domain** declares the GAME-005 terminal; the strategy never self-declares capture. *Stage 6B raises the frozen `E-LOCAL-DEFECT` identity (`LocalDefectError`) rather than inventing a `STAY`: being asked at all means the caller skipped a terminal check it owns. No new error identity was registered.* | **GAME-005** |
+| **PRD03-FR-046** | **DEFERRED — BELIEF / COMPETITIVE STRATEGY STAGE.** Every fallback activation is recorded with its reason. *Deferred with `FR-041`: there is no fallback to record.* | `OBSERVABILITY.md` |
 
 ### 13.5 Zero-token operation
 
@@ -169,7 +221,7 @@ lie**, but its classification MUST be truthful · optional confidence/diagnostic
 | **PRD03-NFR-001** | Decision latency p95 **< 50 ms** at 7×7 with a full barrier set (flood-fill capped), measurable. |
 | **PRD03-NFR-002** | Zero imports of transport, crypto, artifact, GUI or LLM modules (dependency test). |
 | **PRD03-NFR-003** | Every strategy file ≤ **150 lines**; belief, mobility/escape-room, and policy are separate modules. |
-| **PRD03-NFR-004** | The baseline achieves a strictly higher survival rate than a uniform-random legal policy over ≥ 200 seeded self-play sub-games (SIMULATION layer). |
+| **PRD03-NFR-004** | **DEFERRED — BELIEF / COMPETITIVE STRATEGY STAGE.** A strictly higher survival rate than a uniform-random legal policy over ≥ 200 seeded self-play sub-games. *Self-play needs both agents in one process; App E #1/#2 keep them separate with no shared memory, so this needs a SIMULATION harness that does not exist. Not a Stage-6B acceptance criterion.* |
 
 ## 15. State / Lifecycle Responsibilities
 
@@ -232,6 +284,14 @@ replay time**, never live.
 | **PRD03-AC-006** | A complete six-sub-game series runs at **T0** with zero tokens. |
 
 **Thief-specific**
+
+> **DEFERRED — BELIEF / COMPETITIVE STRATEGY STAGE:** `PRD03-AC-020`,
+> `PRD03-AC-022`, `PRD03-AC-025`, `PRD03-AC-026`, `PRD03-AC-028`. `AC-020`,
+> `AC-025` and `AC-026` name a belief mode or a threat region; `AC-022` needs
+> the look-ahead escape-room form (see §13.2); `AC-028` is deferred with
+> `NFR-004`. **`AC-021`, `AC-023`, `AC-024` and `AC-027` are met** — dead-end
+> avoidance, barrier-sensitive decisions, `MOVE_ORDER` tie-breaking, and a
+> baseline that cannot emit a barrier placement at all.
 
 | ID | Criterion |
 |---|---|
@@ -299,5 +359,13 @@ movement · no legality logic of its own · no barrier actions.
 - [x] Total deterministic tie-break order defined
 - [x] Fallback ladder defined with measurable ordering
 - [x] Advanced techniques explicitly deferred, not claimed
-- [ ] Supervising review — **pending**
-- [ ] Implementation — **not started**
+- [x] Supervising review — **complete**. Reviewed at Stage 2-CLOSE and again at
+  the Stage-6A contract & design lock, whose rulings are applied above. *This box
+  previously contradicted §2, which already recorded the review as done; the
+  Stage-6A audit found the contradiction and Stage 6B resolves it in favour of
+  §2, the reviews being a matter of record.*
+- [x] Baseline implementation — **complete (Stage 6B)**, TDD, 100% statement and
+  branch coverage on all four new modules, both repositories
+- [ ] Wiring into an autonomous game owner — **not started (Stage 6C)**
+- [ ] Belief / competitive strategy — **not started**, everything marked
+  DEFERRED above
