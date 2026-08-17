@@ -72,7 +72,13 @@ tracked once, under Pending.
 - [x] PRD-01 game logic - authored and locked; implementation **IN PROGRESS** (Stage 3A foundation only; barriers, capture, terminal/survival, scoring and scent still pending).
 - [x] PRD-02 local FastMCP - authored and locked; implementation **IN PROGRESS** (Stage 3C local turn foundation only; state machine, orchestrator, ports, FastMCP and runtime composition still pending).
 - [x] PRD-03 baseline strategy (**THIEF** role-specific) - authored, locked, re-scoped at Stage 6A and **baseline implemented at Stage 6B**.
-- [x] PRD-04 language & scent - authored and locked; implementation not started.
+- [x] PRD-04 language & scent - **LOCKED as requirements; PARTIALLY IMPLEMENTED.**
+  Scent model exchange/verification/lock (Stage 5-R8) and live emission transport,
+  retention and audit are done; the deterministic T0 language baseline - template
+  catalogue, validator (NFC, word cap, numeric-position Detector V1), `HintPort`
+  policy and the `verdict`/`intent` disclosure consistency check - landed at Stage
+  7B. **Scent interpretation is pending Stage 7C**, and there is no LLM provider:
+  T0 is the only runtime path and token usage is a truthful 0.
 - [x] PRD-05 public network - authored and locked; implementation not started.
 - [x] PRD-06 security & cryptography - authored and locked; implementation not started.
 - [x] PRD-07 reporting, GUI, replay - authored and locked; implementation not started.
