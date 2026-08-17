@@ -16,6 +16,7 @@ from peer_process import CadencePeer
 from r16_builders import GROUP_A, GROUP_B
 
 from mars777_thief.app.artifact_values import UtcTimestamp
+from mars777_thief.app.peer_supervision import PeerDeadline, TimeoutPolicy
 from mars777_thief.app.protocol_errors import ReportDisagreeError
 from mars777_thief.transport.client import PeerClient
 from mars777_thief.transport.peer_transport import FastMcpPeerTransport
@@ -24,7 +25,7 @@ TIMEOUT = 20.0
 
 
 def transport_to(url: str) -> FastMcpPeerTransport:
-    return FastMcpPeerTransport(PeerClient(url, timeout=TIMEOUT))
+    return FastMcpPeerTransport(PeerClient(url, PeerDeadline(TimeoutPolicy(TIMEOUT))))
 
 
 @pytest.fixture

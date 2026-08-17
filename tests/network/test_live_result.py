@@ -25,6 +25,7 @@ from conftest import LivePeer
 from live_support import TIMEOUT, requires_live_ngrok
 from r16_builders import GROUP_A, GROUP_B, STAMP
 
+from mars777_thief.app.peer_supervision import PeerDeadline, TimeoutPolicy
 from mars777_thief.app.protocol_errors import ReportDisagreeError
 from mars777_thief.app.result_agreement_runtime import ResultAgreementRuntime
 from mars777_thief.transport.client import PeerClient
@@ -36,7 +37,9 @@ pytestmark = requires_live_ngrok
 def proposer_over(endpoint: object) -> object:
     """Our own production workflow, wired to the **public** transport adapter."""
     exchange = exchange_for(GROUP_B, 100)
-    exchange.transport = FastMcpPeerTransport(PeerClient(endpoint.url, timeout=TIMEOUT))
+    exchange.transport = FastMcpPeerTransport(
+        PeerClient(endpoint.url, PeerDeadline(TimeoutPolicy(TIMEOUT)))
+    )
     return exchange
 
 
