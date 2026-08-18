@@ -84,6 +84,16 @@ tracked once, under Pending.
   runtime path and token usage is a truthful 0. **Minimum PRD-04 T0 scope is now
   met**; T1/T2, Bayesian belief, opponent modelling and peer-hint interpretation
   remain optional competitive work.
+- [x] **External interoperability (Stage 8A-1R / 8A-1S)** - the non-transport KIT
+  core is implemented against pinned SHA `ad65576`: canonical form, commitment
+  with the nonce outside, `game_id`/`game_uid`, terms digest, spaced result
+  consensus, real codec/result dispatch, and an evidence-layered external audit
+  (`VERIFIED`/`FAILED`/`NOT_APPLICABLE`/`NOT_CHECKABLE`) in which missing evidence
+  is never tampering and an undecidable binding check is never clean. **The KIT
+  scent family is undeclared**: model form matches ours exactly but 29/90 published
+  field-walk cells differ by one ULP of binary64 vs exact Decimal. Transport
+  envelopes, sparring and role alternation remain pending; nothing here yet lets
+  the agent talk to a KIT peer.
 - [x] PRD-05 public network - authored and locked; implementation not started.
 - [x] PRD-06 security & cryptography - authored and locked; implementation not started.
 - [x] PRD-07 reporting, GUI, replay - authored and locked; implementation not started.
