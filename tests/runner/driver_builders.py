@@ -24,11 +24,13 @@ from mars777_thief.app.outbound_evidence_runtime import OutboundEvidenceRuntime
 from mars777_thief.app.peer_runner import PeerRunner
 from mars777_thief.app.peer_turn_messages import Acknowledgement, Commitment, Reveal
 from mars777_thief.app.pregame_session_runtime import PregameSessionRuntime
+from mars777_thief.app.scent_interpretation import LiveScentBelief
 from mars777_thief.app.sealed_record_values import ActorRole
 from mars777_thief.app.sub_game_driver import SubGameDriver
 from mars777_thief.app.turn_service import LocalTurnService
 from mars777_thief.domain.barriers import BarrierQuota
 from mars777_thief.domain.board import Board, Position
+from mars777_thief.domain.scent_model_default import default_scent_model
 from mars777_thief.domain.terminal import TurnLimits
 from mars777_thief.domain.truth import LocalTruth
 
@@ -113,6 +115,7 @@ def peer(
         turns=LocalTurnService(limits=LIMITS, quota=QUOTA),
         config_sha256=side.producer.context.config_sha256,
         hints=TemplateHintPolicy(role=role, hint_max_words=HINT_WORDS),
+        scent=LiveScentBelief(lambda: (), default_scent_model().params),
         sub_game=side.producer.context.sub_game,
         truth=LocalTruth(board=board(), own_position=start or STARTS[role]),
         deadline=5.0,

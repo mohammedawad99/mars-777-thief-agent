@@ -31,6 +31,7 @@ saying it again would be a rule that could disagree.
 """
 
 from dataclasses import dataclass
+from decimal import Decimal
 
 from ..domain.actions import MoveAction
 from ..domain.observation import Observation
@@ -61,7 +62,26 @@ class BaselineStrategy:
                 f"no legal action from {observation.own_position}: an actor with"
                 " none is a terminal the caller settles before asking a strategy",
             )
-        return MoveAction(min(candidates, key=lambda move: self._risk(observation, move)))
+        return MoveAction(min(candidates, key=lambda move: self._rank(observation, move)))
+
+    def _rank(self, observation: Observation, move: Move) -> tuple[int, int, Decimal]:
+        """How cornered *move* leaves this side, then how exposed it is.
+
+        The scent term is added **positively** so that `min` prefers the
+        **weaker** reading: the police's own disclosed emissions are legal
+        partial evidence of where it has been, and a quarry that must choose
+        between two equally roomy cells may lawfully take the quieter one. It
+        sits last so it can never overrule the room comparison, and equal
+        evidence still falls to `MOVE_ORDER`.
+
+        This is the mirror of the pursuer's rule and is **PROJECT-DERIVED**: the
+        source mandates no algorithm, and evading stronger evidence is not
+        claimed to be optimal - only deterministic, and the smallest way for
+        evidence to reach a decision. A neutral belief scores zero everywhere,
+        so a sub-game that has heard nothing decides exactly as it did before.
+        """
+        landing = destination_of(observation.own_position, move)
+        return (*self._risk(observation, move), observation.scent.intensity_at(landing))
 
     def _risk(self, observation: Observation, move: Move) -> tuple[int, int]:
         """How cornered *move* leaves this side: lower is safer.
