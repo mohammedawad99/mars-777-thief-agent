@@ -1,0 +1,10 @@
+{
+  "bank": "final_holdout",
+  "commitment_sha256": "7bea8a2f3aafe3702d9d9c30394665c37adc90985a6ea4227d5a5380c6c4fd0e",
+  "count": 2226,
+  "namespace": "mars777-research/final-holdout-v1/",
+  "results_present": false,
+  "scenario_version": "scenario-1",
+  "sealed_at": "stage-9B-0F",
+  "seed_sha256": "340bfe85917d133898070aab0f0dc1ff4789f194b681bc13defcb1492c88a2b6"
+}

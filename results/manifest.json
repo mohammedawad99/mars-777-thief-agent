@@ -1,7 +1,7 @@
 {
-  "analysis": "analysis-1",
+  "analysis": "analysis-2",
   "baseline": {
-    "commit": "07d16f59b6c00e49d9a494c1dd08210dedacb5d4",
+    "commit": "ac753569210e402f8df3e00fbf57106f63bc01e1",
     "package": "mars777_thief",
     "role": "thief",
     "source_sha256": "ff52d5395c068f3049bf44d70857f19ed06313452beb9fef2ade74fa0e9d77fb",
@@ -9,6 +9,17 @@
     "strategy": "BaselineStrategy"
   },
   "config_corpus_sha256": "24fe07211fc682ae7108cd005524e6fd34f9c609dd9d7d3f780af9d4e57baf50",
+  "final_holdout": {
+    "bank": "final_holdout",
+    "commitment_sha256": "7bea8a2f3aafe3702d9d9c30394665c37adc90985a6ea4227d5a5380c6c4fd0e",
+    "count": 2226,
+    "namespace": "mars777-research/final-holdout-v1/",
+    "results_present": false,
+    "scenario_version": "scenario-1",
+    "sealed_at": "stage-9B-0F",
+    "seed_sha256": "340bfe85917d133898070aab0f0dc1ff4789f194b681bc13defcb1492c88a2b6"
+  },
+  "final_holdout_results_present": false,
   "opponent_corpus": {
     "families": [
       "random_legal",
@@ -23,10 +34,15 @@
     "sha256": "efe5098bb26173a25ed312d4ebfd9e556271337f0072c0d2272b77ccb17a2547"
   },
   "reproduce": "uv run python -m research.bench_main all --out results",
-  "schema": "research-1",
+  "scenario_version": "scenario-1",
+  "schema": "research-2",
   "seed_banks": {
     "development": {
       "sha256": "a4c515e45a8597e706c6e9f934dc5cf2298c42609793918973965f696ffac873",
+      "size": 64
+    },
+    "final_holdout": {
+      "sha256": "340bfe85917d133898070aab0f0dc1ff4789f194b681bc13defcb1492c88a2b6",
       "size": 64
     },
     "holdout": {
@@ -38,5 +54,7 @@
       "size": 16
     }
   },
-  "seed_namespace": "mars777-research/v1/"
+  "seed_namespace": "mars777-research/v1/",
+  "statistical_unit": "unique scenario_id",
+  "weighting": "scenario-weighted over the varied configurations, which carry equal target N by construction; the fixed reference geometry is reported separately and is excluded from the headline because its legal opening space is exactly one"
 }

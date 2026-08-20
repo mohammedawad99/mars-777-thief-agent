@@ -1,55 +1,102 @@
 {
   "baseline": {
-    "commit": "07d16f59b6c00e49d9a494c1dd08210dedacb5d4",
+    "commit": "ac753569210e402f8df3e00fbf57106f63bc01e1",
     "package": "mars777_thief",
     "role": "thief",
     "source_sha256": "ff52d5395c068f3049bf44d70857f19ed06313452beb9fef2ade74fa0e9d77fb",
     "sources": "app/baseline_strategy.py",
     "strategy": "BaselineStrategy"
   },
-  "games": 6048,
+  "headline_scenarios": 4988,
   "overall": {
     "capture_rate": {
-      "ci_high": 0.01207,
-      "ci_low": 0.007275,
-      "mean": 0.009425,
+      "ci_high": 0.014635,
+      "ci_low": 0.008621,
+      "mean": 0.011427,
       "median": 0.0,
-      "n": 6048
+      "n": 4988
     },
     "mean_barriers": {
-      "ci_high": 1.388724,
-      "ci_low": 1.235119,
-      "mean": 1.312004,
+      "ci_high": 1.242582,
+      "ci_low": 1.102045,
+      "mean": 1.170209,
       "median": 0.0,
-      "n": 6048
+      "n": 4988
     },
     "mean_score": {
-      "ci_high": 9.963624,
-      "ci_low": 9.939649,
-      "mean": 9.952877,
+      "ci_high": 9.956897,
+      "ci_low": 9.927827,
+      "mean": 9.942863,
       "median": 10.0,
-      "n": 6048
+      "n": 4988
     },
     "mean_steps": {
-      "ci_high": 36.460483,
-      "ci_low": 36.222222,
-      "mean": 36.342262,
+      "ci_high": 36.760826,
+      "ci_low": 36.459904,
+      "mean": 36.615477,
       "median": 35.0,
-      "n": 6048
+      "n": 4988
     },
     "survival_rate": {
-      "ci_high": 0.992725,
-      "ci_low": 0.98793,
-      "mean": 0.990575,
+      "ci_high": 0.991379,
+      "ci_low": 0.985565,
+      "mean": 0.988573,
       "median": 1.0,
-      "n": 6048
+      "n": 4988
     },
     "win_rate": {
-      "ci_high": 0.992725,
-      "ci_low": 0.98793,
-      "mean": 0.990575,
+      "ci_high": 0.991379,
+      "ci_low": 0.985565,
+      "mean": 0.988573,
       "median": 1.0,
-      "n": 6048
+      "n": 4988
     }
-  }
+  },
+  "raw_rows": 5033,
+  "reference_only": {
+    "capture_rate": {
+      "ci_high": 0.0,
+      "ci_low": 0.0,
+      "mean": 0.0,
+      "median": 0.0,
+      "n": 9
+    },
+    "mean_barriers": {
+      "ci_high": 3.777778,
+      "ci_low": 0.0,
+      "mean": 1.555556,
+      "median": 0.0,
+      "n": 9
+    },
+    "mean_score": {
+      "ci_high": 10.0,
+      "ci_low": 10.0,
+      "mean": 10.0,
+      "median": 10.0,
+      "n": 9
+    },
+    "mean_steps": {
+      "ci_high": 35.0,
+      "ci_low": 35.0,
+      "mean": 35.0,
+      "median": 35.0,
+      "n": 9
+    },
+    "survival_rate": {
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "mean": 1.0,
+      "median": 1.0,
+      "n": 9
+    },
+    "win_rate": {
+      "ci_high": 1.0,
+      "ci_low": 1.0,
+      "mean": 1.0,
+      "median": 1.0,
+      "n": 9
+    }
+  },
+  "reference_scenarios": 9,
+  "statistical_unit": "unique scenario_id"
 }

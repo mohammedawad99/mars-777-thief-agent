@@ -65,7 +65,7 @@ def bar_chart(title: str, unit: str, bars: tuple[Bar, ...], caption: str) -> Fra
         Text(LEFT - 150, 48, caption, MUTED, 11),
         Text(LEFT - 150, HEIGHT - 26, f"value ({unit}); bars start at zero", MUTED, 11),
     ]
-    height = max(10, plot_h // max(len(bars), 1) - 10)
+    height = max(10, plot_h // max(len(bars), 1) - 16)
     for index, bar in enumerate(bars):
         top = TOP + index * (plot_h // len(bars))
         width = int(plot_w * bar.value / ceiling)
@@ -86,10 +86,15 @@ def bar_chart(title: str, unit: str, bars: tuple[Bar, ...], caption: str) -> Fra
 
 
 def _interval(bar: Bar, ceiling: float, plot_w: int, top: int, height: int) -> Rect:
-    """The confidence interval, drawn as a thin band across the bar."""
+    """The 95% interval, drawn just **below** the bar rather than through it.
+
+    Through the bar it would sit under the value label and neither could be
+    read; below it, both are legible and the interval is still visibly attached
+    to the measurement it belongs to.
+    """
     low = LEFT + int(plot_w * (bar.low or 0.0) / ceiling)
     high = LEFT + int(plot_w * (bar.high or 0.0) / ceiling)
-    return Rect(low, top + height // 2 - 1, max(high - low, 1), 3, INK)
+    return Rect(low, top + height + 1, max(high - low, 1), 3, INK)
 
 
 def save(frame: Frame, path: Path) -> Path:
