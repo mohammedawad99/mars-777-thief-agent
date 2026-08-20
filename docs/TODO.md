@@ -100,7 +100,7 @@ and the test-file split at Stages 9A-1B1…9A-1C.
   the agent talk to a KIT peer.
 - [x] PRD-05 public network - authored and locked; **IMPLEMENTED AND DEMONSTRATED.** The tunnel adapter, the group gateway and the ten-check readiness gate are wired behind one stable public route, with proven teardown and live role handoff. League participation against another group's agent remains `PARTNER_DEPENDENT`.
 - [x] PRD-06 security & cryptography - authored and locked; **IMPLEMENTED.** Commit-reveal over SHA-256, the sealed record, CSPRNG nonces, keyed Step-0 and configuration authentication, the config lock, final nonce reveal, commitment recomputation, `TAMPERED` on mismatch and golden vectors are all in the repository and covered.
-- [x] PRD-07 reporting, GUI, replay - authored and locked. **Implemented since:** the Replay Viewer at 9A-2A/9A-2AF, the live and replay GUI at 9A-2B, and the provider rate-limit Gatekeeper at 9A-1C. **Gmail reporting remains open** - see the remaining-work section at the end of this file.
+- [x] PRD-07 reporting, GUI, replay - authored and locked. **Implemented since:** the Replay Viewer at 9A-2A/9A-2AF, the live and replay GUI at 9A-2B, and the provider rate-limit Gatekeeper at 9A-1C. **Gmail reporting closed at 9A-2C.** What remains of the block is a live send, which is operator-authorised rather than implementable.
 - [x] **Phase 3 — Deterministic Core Implementation** — **STARTED** (Stage 3A closed; the phase itself is **not** complete).
 - [x] **Stage 3B — Deterministic Game Semantics** — **CLOSED** (barriers, capture, terminal/survival, scoring, bounded scent physics).
 - [x] **Stage 3C — Local Application / Turn Orchestration Foundation** — **CLOSED.**
@@ -217,17 +217,33 @@ repository and green in CI on the exact commit.
       sub-game with the viewer raising on every snapshot. Two real screenshots
       are committed under `docs/evidence/gui/`, closing the `DOC-001` screenshot
       component. Documented in `docs/reference/GUI.md`.
-- [ ] **Gmail result reporting** (`REPORT-001`, MUST). No mailer exists.
+- [x] **Gmail result reporting** (`REPORT-001` / `REPORT-002` / `JSON-001` /
+      `JSON-002` / `LEAGUE-002`, MUST) - **DONE at Stage 9A-2C.** The agreed
+      result artifact is mailed to the fixed lecturer address
+      (`rmisegal+uoh26finalgame@gmail.com`, Appendix F Table 20, non-negotiable)
+      as a JSON **attachment**, never as free text, through the Gmail API with
+      the send-only OAuth scope. Eligibility is the mutual agreement Appendix E
+      rule 35 requires, read from the artifact itself, so a friendly or KIT run
+      cannot be reported. Nothing about the game is recomputed to build the
+      email. **No real message has been sent** - that needs an operator
+      credential plus an explicit authorisation, and CI can never send.
+      Documented in `docs/reference/REPORTING.md`.
 - [x] **Provider rate-limit enforcement** (guideline §5.1/§5.2/§5.3) -
       **DONE at Stage 9A-1C.** `config/rate_limits.json` is versioned and
       validated at load; `app/gatekeeper.py` enforces rate windows, concurrency,
       a bounded FIFO with backpressure and bounded retries with 429/`Retry-After`
       handling, and records every call without its content. The tunnel Agent API
       read is composed through it; peer gameplay is held outside by test.
-- [ ] **Gmail rate-limit enforcement** (`REPORT-003` / `NET-002` / Appendix E-28,
-      MUST) - **still open, and it is the surface the book actually governs.**
-      The mechanism exists and is proven against a fake provider; what is missing
-      is the Gmail sender to register `reporting.send_report` against.
+- [x] **Gmail rate-limit enforcement** (`REPORT-003` / `NET-002` / Appendix E-28,
+      MUST) - **DONE at Stage 9A-2C**, and with the algorithm the source names.
+      Rule 28 requires a **token bucket**, not merely equivalent quota
+      behaviour, so the Gatekeeper gained an admission chain rather than a
+      relabelled window: `tokens <- min(C, tokens + r*dt)`, `allow <=> tokens >=
+      1`, beside the Quota Manager and DOS detector Ch 9 §9.3.1 names. The Gmail
+      send is composed through it as `gmail.send_report`; a `429` backs off,
+      honours `Retry-After` within a configured cap, retries a bounded number of
+      times and then reports failure. `SEC-001` (E-29, DOS detector) closes with
+      it.
 - [x] **`rate_limits.version`** (guideline §8.1, third row) - **DONE at Stage
       9A-1C.** Stored as the string `"1.00"`, validated against the versions this
       build supports before any provider call is possible. All three §8.1 rows
@@ -265,7 +281,7 @@ cryptography, the FastMCP peer transport, the runtime composition, the capture
 and semantic audit, the scent model/lock/Reveal-V2/audit/log chain, autonomous
 strategy, the production game owner, belief interpretation, the four artifact
 families and public-network play are all implemented, tested and demonstrated.
-**Of PRD-07, the Replay Viewer (9A-2A), the graphical interface (9A-2B) and
-provider rate-limit enforcement (9A-1C) are implemented; Gmail reporting and its
-own rate-limited surface are not.** See the README's *Implementation status*
+**PRD-07 is implemented in full: the Replay Viewer (9A-2A), the graphical
+interface (9A-2B), provider rate-limit enforcement (9A-1C) and Gmail reporting
+with its token-bucket gate (9A-2C). No live send has been performed.** See the README's *Implementation status*
 section for the exact boundary._

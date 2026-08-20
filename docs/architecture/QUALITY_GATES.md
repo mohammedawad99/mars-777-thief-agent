@@ -44,12 +44,12 @@ transparency, and code is **split, never compressed** to fit — semicolon
 packing or removing docstrings to pass the count is a violation of the rule's
 purpose, not compliance with it.
 
-**Measured at Stage 9A-2B.**
+**Measured at Stage 9A-2C.**
 
 | Tree | Files | Over the limit |
 |---|---|---|
-| `src/**/*.py` | 278 | **0** |
-| `tests/**/*.py` | 465 | **0** |
+| `src/**/*.py` | 293 | **0** |
+| `tests/**/*.py` | 482 | **0** |
 
 **Enforcement: automatic.** `tools/check_python_loc.py` is the one authority for
 this rule. It counts code lines exactly as defined above, inspects **both**
