@@ -1,0 +1,4 @@
+group_by,group,win_rate,win_rate_ci_low,win_rate_ci_high,capture_rate,capture_rate_ci_low,capture_rate_ci_high,survival_rate,survival_rate_ci_low,survival_rate_ci_high,mean_steps,mean_steps_ci_low,mean_steps_ci_high,mean_barriers,mean_barriers_ci_low,mean_barriers_ci_high,mean_score,mean_score_ci_low,mean_score_ci_high,n
+seed_set,development,0.991071,0.987351,0.99442,0.008929,0.00558,0.012649,0.991071,0.987351,0.99442,36.361979,36.191964,36.545759,1.285714,1.179688,1.393601,9.955357,9.936756,9.972098,2688
+seed_set,holdout,0.989583,0.985863,0.992932,0.010417,0.007068,0.014137,0.989583,0.985863,0.992932,36.302827,36.111235,36.493304,1.295015,1.184524,1.406994,9.947917,9.929315,9.964658,2688
+seed_set,stress,0.99256,0.986607,0.998512,0.00744,0.001488,0.013393,0.99256,0.986607,0.998512,36.421131,36.049107,36.772321,1.485119,1.239583,1.739583,9.962798,9.933036,9.99256,672

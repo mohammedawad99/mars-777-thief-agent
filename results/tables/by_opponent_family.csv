@@ -1,0 +1,8 @@
+group_by,group,win_rate,win_rate_ci_low,win_rate_ci_high,capture_rate,capture_rate_ci_low,capture_rate_ci_high,survival_rate,survival_rate_ci_low,survival_rate_ci_high,mean_steps,mean_steps_ci_low,mean_steps_ci_high,mean_barriers,mean_barriers_ci_low,mean_barriers_ci_high,mean_score,mean_score_ci_low,mean_score_ci_high,n
+opponent_family,adversarial_corner,0.958333,0.944444,0.969907,0.041667,0.030093,0.055556,0.958333,0.944444,0.969907,35.231481,34.710648,35.703704,5.0,4.769676,5.244213,9.791667,9.722222,9.849537,864
+opponent_family,barrier_aware,0.975694,0.965278,0.984954,0.024306,0.015046,0.034722,0.975694,0.965278,0.984954,35.831019,35.391204,36.24537,4.184028,3.90162,4.460648,9.878472,9.826389,9.924769,864
+opponent_family,center_mobility,1.0,1.0,1.0,0.0,0.0,0.0,1.0,1.0,1.0,36.666667,36.435185,36.921296,0.0,0.0,0.0,10.0,10.0,10.0,864
+opponent_family,evasive,1.0,1.0,1.0,0.0,0.0,0.0,1.0,1.0,1.0,36.666667,36.435185,36.921296,0.0,0.0,0.0,10.0,10.0,10.0,864
+opponent_family,pursuit,1.0,1.0,1.0,0.0,0.0,0.0,1.0,1.0,1.0,36.666667,36.435185,36.921296,0.0,0.0,0.0,10.0,10.0,10.0,864
+opponent_family,random_legal,1.0,1.0,1.0,0.0,0.0,0.0,1.0,1.0,1.0,36.666667,36.435185,36.921296,0.0,0.0,0.0,10.0,10.0,10.0,864
+opponent_family,scent_aware,1.0,1.0,1.0,0.0,0.0,0.0,1.0,1.0,1.0,36.666667,36.435185,36.921296,0.0,0.0,0.0,10.0,10.0,10.0,864

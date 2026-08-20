@@ -1,0 +1,55 @@
+{
+  "baseline": {
+    "commit": "07d16f59b6c00e49d9a494c1dd08210dedacb5d4",
+    "package": "mars777_thief",
+    "role": "thief",
+    "source_sha256": "ff52d5395c068f3049bf44d70857f19ed06313452beb9fef2ade74fa0e9d77fb",
+    "sources": "app/baseline_strategy.py",
+    "strategy": "BaselineStrategy"
+  },
+  "games": 6048,
+  "overall": {
+    "capture_rate": {
+      "ci_high": 0.01207,
+      "ci_low": 0.007275,
+      "mean": 0.009425,
+      "median": 0.0,
+      "n": 6048
+    },
+    "mean_barriers": {
+      "ci_high": 1.388724,
+      "ci_low": 1.235119,
+      "mean": 1.312004,
+      "median": 0.0,
+      "n": 6048
+    },
+    "mean_score": {
+      "ci_high": 9.963624,
+      "ci_low": 9.939649,
+      "mean": 9.952877,
+      "median": 10.0,
+      "n": 6048
+    },
+    "mean_steps": {
+      "ci_high": 36.460483,
+      "ci_low": 36.222222,
+      "mean": 36.342262,
+      "median": 35.0,
+      "n": 6048
+    },
+    "survival_rate": {
+      "ci_high": 0.992725,
+      "ci_low": 0.98793,
+      "mean": 0.990575,
+      "median": 1.0,
+      "n": 6048
+    },
+    "win_rate": {
+      "ci_high": 0.992725,
+      "ci_low": 0.98793,
+      "mean": 0.990575,
+      "median": 1.0,
+      "n": 6048
+    }
+  }
+}
