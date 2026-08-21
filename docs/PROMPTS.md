@@ -771,3 +771,12 @@ Every entry below is **`RECONSTRUCTED PROMPT INTENT`**, not verbatim prompt text
 23. **Ask which inputs the code actually reads before treating them as
     conditions.** Six of seven opponent families ignored their seed entirely, so
     six sevenths of the "variation" was relabelling one game.
+- **Close a gap where it actually is.** The notebook gap was real; the fix was
+  a notebook that computes nothing, not a Jupyter stack in the tournament lock.
+- **Read the requirement's own conditional.** `DOC-001` asks for learning curves
+  *if RL is used*. No RL is used, so the component is conditionally not
+  applicable — and inventing one would have been a fabricated result.
+- **Verify a licence, do not recall one.** Every licence in the dependency
+  inventory was read from installed package metadata.
+- **A decision not to change is still a result.** `NO_CHANGE` is reported with
+  the measurement that justifies it, not as an absence of work.

@@ -304,3 +304,50 @@ families and public-network play are all implemented, tested and demonstrated.
 interface (9A-2B), provider rate-limit enforcement (9A-1C) and Gmail reporting
 with its token-bucket gate (9A-2C). No live send has been performed.** See the README's *Implementation status*
 section for the exact boundary._
+
+
+---
+
+## Final classification — Stage 9A-3
+
+The list above is the project's history. This is its current state, in four
+buckets, so nothing reads as an open development backlog when it is not one.
+
+### CLOSED — completed project work
+
+Protocol, Step-0 and authentication · configuration negotiation and lock ·
+commit/reveal · movement, scent and hints · both audit gates · exact-six
+autonomous series · the four artifact families · public-network play · Replay
+Viewer · live and replay GUI · provider rate limiting · Gmail reporting and its
+attachment-only contract · the benchmark laboratory and the corrected baseline ·
+the **`NO_CHANGE` strategy decision, re-derived after the methodology
+correction** · packaging (`py.typed`, six console scripts) · the research
+notebook · architecture diagrams · audit-gate, expected-results and dependency
+evidence.
+
+**This repository ships no barrier policy**, because `BAR-004` gives placement
+to the police alone. The competitive barrier research belongs to the police
+repository and is not restated here as this agent's work.
+
+### DEFERRED — PARTNER_DEPENDENT
+
+- [ ] Friendly interop with another group's live agent.
+- [ ] A counted match, and a counted result agreement with a real opponent.
+
+Blocked on a counterparty, not on this repository.
+
+### OPERATOR_DEPENDENT
+
+- [ ] One authorised live Gmail send. **`LIVE_GMAIL_SEND: NOT_PERFORMED`.**
+
+### FINALIZATION — Stage 9C only
+
+- [ ] Hostile final audit.
+- [ ] Push the outstanding local commits in one CI run.
+- [ ] Create the final submission tag. **No tag exists yet.**
+
+### Deliberately not doing
+
+- Further strategy work. `NO_CHANGE` is an evidence-based decision at 0.9886
+  over 4,988 scenarios with six of seven families already perfect, not an
+  omission.
