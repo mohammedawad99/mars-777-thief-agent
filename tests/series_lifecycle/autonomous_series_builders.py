@@ -51,8 +51,16 @@ def runtimes_for(role: ActorRole) -> object:
     return build_them
 
 
-def driver_for(series: SeriesRuntime, role: ActorRole) -> SeriesDriver:
-    """The production series owner for one side. No action, no outcome."""
+def driver_for(
+    series: SeriesRuntime, role: ActorRole, reporter: object | None = None
+) -> SeriesDriver:
+    """The production series owner for one side. No action, no outcome.
+
+    *reporter* is the automatic report dispatch. Left out, the series reports
+    nothing - which is what most of these proofs want, since they are about
+    gameplay rather than delivery.
+    """
+    extra = {} if reporter is None else {"reporter": reporter}
     return SeriesDriver(
         series=series,
         strategy=series.composition.strategy,
@@ -60,6 +68,7 @@ def driver_for(series: SeriesRuntime, role: ActorRole) -> SeriesDriver:
         config=r7.CONFIG,
         runtimes=runtimes_for(role),  # type: ignore[arg-type]
         deadline=60.0,
+        **extra,  # type: ignore[arg-type]
     )
 
 
