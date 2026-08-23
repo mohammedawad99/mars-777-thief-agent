@@ -1,7 +1,7 @@
 """One role backend playing only the sub-games the schedule gives it.
 
-This repository is the **Thief** implementation and stays that way: it plays
-the sub-games whose scheduled role is `THIEF`, refuses any other, and never
+This repository is the **Police** implementation and stays that way: it plays
+the sub-games whose scheduled role is `POLICE`, refuses any other, and never
 imports, borrows or emulates the Thief. Alternation happens one level up, in
 the group gateway that routes each sub-game to the backend that owns it.
 
@@ -163,6 +163,6 @@ class KitRoleBackend:
             config=self.config,
         )
 
-    async def _send_settlement(self, envelope: dict[str, object]) -> None:
+    async def _send_settlement(self, envelope: dict[str, object]) -> bool:
         """Reach for the transport only when there is a settlement to send."""
-        await self.transport.send_settlement(envelope)
+        return await self.transport.send_settlement(envelope)
