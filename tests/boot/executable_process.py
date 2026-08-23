@@ -93,12 +93,24 @@ def spawn_opponent(
     script = Path(__file__).with_name("opponent_entrypoint.py")
     return subprocess.Popen(
         [sys.executable, str(script), role, str(port), opponent_url, str(root), variant],
-        env={**os.environ},
+        env={**os.environ, "MARS777_GAME_CONTRACT": str(SYNTHETIC_CONTRACT)},
         stdout=subprocess.PIPE,
         stderr=subprocess.PIPE,
         text=True,
         creationflags=GROUP_FLAG,
     )
+
+
+SYNTHETIC_CONTRACT = Path(__file__).resolve().parent / "synthetic_game_contract.json"
+"""The pairing this synthetic series plays under.
+
+The two spawned processes identify as `MaRs-777` and `GROUP-XY`, and the shipped
+agreement names only the real counted pairing - so without an explicit synthetic
+contract the `GROUP-XY` process correctly fails closed with no agreed role, dies
+before requesting the result, and leaves its counterpart waiting until timeout.
+That is the production behaviour working; the harness simply has to say which
+pairing it is playing.
+"""
 
 
 def environment(
@@ -118,10 +130,11 @@ def environment(
         "MARS777_AUTH_SECRET": SECRET,
         "MARS777_ARTIFACT_ROOT": str(root if root is not None else Path.cwd()),
         "MARS777_OPPONENT_ENDPOINT": opponent or f"http://{HOST}:{free_port()}{MCP_PATH}",
+        "MARS777_GAME_CONTRACT": str(SYNTHETIC_CONTRACT),
     }
 
 
-def launch_document(group_id: str = GROUP_A, slot: str = "group_a") -> str:
+def launch_document(group_id: str = GROUP_A, slot: str | None = None) -> str:
     """A launch document in the exact frozen wire shapes, from real values.
 
     `config` is this side's opening candidate, in the same `NegotiatedConfigWire`
@@ -139,7 +152,7 @@ def launch_document(group_id: str = GROUP_A, slot: str = "group_a") -> str:
     )
 
 
-def written_launch(directory: Path, group_id: str = GROUP_A, slot: str = "group_a") -> Path:
+def written_launch(directory: Path, group_id: str = GROUP_A, slot: str | None = None) -> Path:
     """Write the launch document a subprocess can be started with."""
     path = directory / "launch.json"
     path.write_text(launch_document(group_id, slot), encoding="utf-8")

@@ -60,7 +60,7 @@ def main(role_name: str, port: int, opponent: str, root: str, variant: str = "sa
     settings = RuntimeSettings(
         base.role, base.local, base.key_id, base.secret, base.opponent, Path(root)
     )
-    composition = compose_agent(settings, compose.identity_for(GROUP_B, "group_b"), GROUP_B)
+    composition = compose_agent(settings, compose.identity_for(GROUP_B), GROUP_B)
     runtime = AgentRuntime(composition, settings.local.host, port)
     asyncio.run(AutonomousBoot(runtime, settings, config, role).run())
     return 0
