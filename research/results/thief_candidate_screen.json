@@ -1,0 +1,23 @@
+{
+  "question": "Does any serious Thief candidate beat the shipped baseline where the evaluator has measurable headroom?",
+  "bank": "development",
+  "evaluators": ["choke_control", "sustained_containment"],
+  "why_these": "The only two families that capture anything. Movement-only pursuit scores exactly 1.000 against any Thief, so screening there would rank nothing.",
+  "baseline": {"strategy": "BaselineStrategy", "survival": 0.9688, "n": 321},
+  "candidates": {
+    "T-C choke_aware": {
+      "survival": 0.9657, "delta": -0.0031, "gains": 8, "losses": 9,
+      "mechanism": "prefer the cell whose region survives the worst single lawful barrier, with current region as tie-break",
+      "verdict": "REJECTED"
+    },
+    "T-D escape_lookahead": {
+      "survival": 0.9564, "delta": -0.0125, "gains": 0, "losses": 4,
+      "mechanism": "one ply each side; take the move whose worst case after the pursuer's best reply leaves us furthest",
+      "verdict": "REJECTED"
+    }
+  },
+  "finding": "T-C is not saturated - it changes outcomes in both directions, gaining 8 and losing 9 - so the instrument does discriminate here. It simply does not discriminate in the candidate's favour. Anticipating a barrier costs more room than it saves, because the shipped rule's region-then-mobility ordering already avoids most cells a barrier could punish. T-D is worse and gains nothing at all: distance from a believed cell is a poor proxy for safety when the belief marks where the pursuer has been.",
+  "defect_found_and_fixed": "The first run of T-C crashed. orthogonal_neighbours returns off-board cells and the candidate did not filter them, so the hypothetical Board refused a blocked cell at [-1,1]. A defect in the candidate, not a finding.",
+  "conclusion": "The shipped Thief is retained on a candidate comparison, not on an argument. Two serious general mechanisms were authored, screened against the only evaluators with headroom, and both lost.",
+  "not_claimed": "Optimality. Two rejected candidates do not exhaust the space; they establish that the obvious structural alternatives do not beat the baseline here."
+}
