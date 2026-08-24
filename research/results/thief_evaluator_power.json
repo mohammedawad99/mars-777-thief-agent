@@ -1,0 +1,24 @@
+{
+  "question": "Does the Thief evaluator have enough measurement power to rank a candidate?",
+  "baseline": "BaselineStrategy (shipped Thief)",
+  "bank": "development",
+  "original_seven_families": {
+    "n": 2247, "survival": 0.9893,
+    "per_family": {
+      "center_mobility": 1.0, "evasive": 1.0, "pursuit": 1.0,
+      "random_legal": 1.0, "scent_aware": 1.0,
+      "barrier_aware": 0.9688, "adversarial_corner": 0.9564
+    },
+    "verdict": "SATURATED - five families at exactly 1.000. A bank the baseline never loses on ranks nothing."
+  },
+  "why_the_originals_are_weak": "pursuit ranks moves by scent intensity, so it climbs the gradient of where the evader HAS BEEN. A trail leads to a vacated cell. None of the seven closes Manhattan distance on a believed position, and none spends a barrier to remove somewhere the evader could go.",
+  "strengthened_families": {
+    "closing_pursuit": {"survival": 1.0, "mechanism": "minimise distance to the strongest believed cell"},
+    "anticipating": {"survival": 1.0, "mechanism": "one ply each side; take the move whose worst case after the evader's best reply is best"},
+    "choke_control": {"survival": 0.9688, "mechanism": "place the lawful barrier that removes most of the evader's reachable region"}
+  },
+  "finding": "Movement-only pursuit cannot capture a mobile evader when the only lawful evidence is a scent trail. closing_pursuit and anticipating both converge on where the evader was, not where it is, and both score exactly 1.000 - the same as the weak families they were built to replace. Only region denial catches anything: choke_control is the single mechanism that captures, and it captures 3.1%.",
+  "honest_status": "The evaluator is stronger and better understood, but it is still saturated. 96.88% survival against the strongest available family leaves too little headroom to rank Thief candidates against each other.",
+  "not_claimed": "The shipped Thief is NOT claimed optimal. That claim would require an evaluator with measurement power, and this one does not yet have it.",
+  "next": "A sustained containment family that shrinks the reachable region every turn rather than placing one severing barrier, which is the only mechanism shown to capture at all."
+}
