@@ -15,7 +15,8 @@ from peer_ops import agreement, commitment
 from mars777_thief.app.capture_values import CaptureAnswer, TurnOutcome
 from mars777_thief.app.peer_supervision import PeerDeadline, TimeoutPolicy
 from mars777_thief.app.protocol_errors import MalformedMessageError, StaleMessageError
-from mars777_thief.transport.client import PeerClient, envelope, wire_json
+from mars777_thief.transport.call_arguments import strict_arguments as envelope
+from mars777_thief.transport.client import PeerClient, wire_json
 from mars777_thief.transport.codec_final import encode_result_agreement
 from mars777_thief.transport.codec_turn import encode_commitment
 from mars777_thief.transport.wire_errors import TransportFailureError
