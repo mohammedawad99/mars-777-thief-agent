@@ -351,3 +351,19 @@ Blocked on a counterparty, not on this repository.
 - Further strategy work. `NO_CHANGE` is an evidence-based decision at 0.9886
   over 4,988 scenarios with six of seven families already perfect, not an
   omission.
+
+## Known issue — counted run 2026-08-24 (open, documented, not fixed)
+
+**Settled sub-game rows do not reach the gateway result assembler in a counted
+alternating series.** Observed live against `ahk-yosi`: all six windows played
+and audited, the gateway collected zero rows, so no `RESULT_APPROVAL_CORE`,
+no `result_sha256`, no result artifact, and automatic reporting was never
+eligible. Official set 1 of 14.
+
+Deliberately **not** fixed under the submission deadline: an untested patch to
+the counted path is worse than a documented defect. Evidence and analysis:
+`docs/evidence/counted/2026-08-24-ahk-yosi/07_incident/INCIDENT_REPORT.md`.
+
+Narrowly scoped future work: verify the backend -> gateway admin row bridge
+(`contribute_row`) end to end in a counted run, with a regression test that
+fails when the gateway finishes a series holding fewer than six rows.
