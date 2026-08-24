@@ -1,0 +1,23 @@
+{
+  "question": "Is the Thief evaluator saturated because the instrument is weak, or because capture is genuinely rare?",
+  "evaluator_work": {
+    "families_added": ["closing_pursuit", "choke_control", "anticipating", "sustained_containment"],
+    "mechanisms": "close Manhattan distance on a believed cell; sever the reachable region; anticipate one ply of reply; spend the whole quota on region denial rather than one barrier",
+    "results_development": {
+      "closing_pursuit": 1.0, "anticipating": 1.0,
+      "choke_control": 0.9688, "sustained_containment": 0.9688
+    }
+  },
+  "movement_finding": "closing_pursuit and anticipating both score exactly 1.000. The only lawful evidence about the evader is a scent trail, and a trail leads to a cell it has left, so both converge on where it was rather than where it is. Movement-only pursuit cannot capture a mobile evader under trail-based evidence.",
+  "containment_finding": "Region denial is the sole mechanism that captures. Spending the whole quota on it (sustained_containment) reproduces choke_control exactly at 0.9688 - so 3.1% is where this mechanism tops out, not a coefficient waiting to be tuned.",
+  "real_world_corroboration": {
+    "source": "rerun-9, six authenticated cross-implementation sub-games against s82kma9e",
+    "captures_by_either_police": "0/6",
+    "every_sub_game": "SURVIVAL, cop 5 / thief 10",
+    "note": "Two independently authored production implementations, alternating roles, produced zero captures in six real sub-games. Used here strictly as a general behavioural observation, not as a training target: no trajectory, coordinate or opponent identity enters any strategy."
+  },
+  "conclusion": "The saturation is a property of this configuration, not only of the instrument. On a 7x7 board within the agreed move budget, a competent evader is very hard to capture by any legal police mechanism, and four independently authored strong families agree on that. The Thief baseline therefore sits at or near the achievable ceiling, which leaves almost no headroom for a Thief candidate to demonstrate an improvement in.",
+  "what_is_claimed": "The evaluator was strengthened with four new mechanisms and the saturation was explained rather than assumed. The shipped Thief is retained.",
+  "what_is_NOT_claimed": "That the Thief is provably optimal. Headroom of 3.1% against the strongest available family is too little to rank candidates with confidence, and no Thief candidate was promoted on the strength of a measurement this instrument cannot make.",
+  "consequence_for_the_series": "Where captures are near-zero for both sides, the series outcome turns on the Police's marginal capture ability rather than on Thief survival. That is why the Police cycle was carried through a sealed holdout and the Thief cycle was not."
+}

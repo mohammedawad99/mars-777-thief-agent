@@ -41,8 +41,15 @@ STRONG_FAMILIES: Final[tuple[str, ...]] = (
     "closing_pursuit",
     "choke_control",
     "anticipating",
+    "sustained_containment",
 )
-"""Three mechanisms the original seven never used: close, sever, and anticipate."""
+"""Four mechanisms the original seven never used.
+
+`sustained_containment` was added after the first three were measured: closing
+and anticipating both scored exactly 1.000, because the only lawful evidence is
+a scent trail and a trail leads to a cell the evader has left. Region denial was
+the sole mechanism that captured anything, so the fourth family spends the whole
+quota on it rather than one barrier at a time."""
 
 
 def _distance(one: Position, other: Position) -> int:
@@ -92,10 +99,12 @@ class StrongPolice:
         target = believed(observation)
         if target is None:
             return MoveAction(min(moves, key=lambda one: one.value))
-        if self.family == "choke_control":
+        if self.family in ("choke_control", "sustained_containment"):
             placement = self._sever(observation, target)
             if placement is not None:
                 return BarrierAction(placement)
+            if self.family == "sustained_containment":
+                return MoveAction(self._toward_room(observation, target, moves))
         if self.family == "anticipating":
             return MoveAction(self._anticipate(observation, target, moves))
         return MoveAction(self._close(observation, target, moves))
@@ -119,6 +128,34 @@ class StrongPolice:
                 one.value,
             ),
         )
+
+    def _toward_room(
+        self, observation: Observation, target: Position, moves: tuple[Move, ...]
+    ) -> Move:
+        """Move to where a placement will sever most next turn, not merely closer.
+
+        Containment fails when the pursuer stands somewhere no lawful placement
+        can cut anything. Closing distance is the tie-break rather than the goal:
+        the point is to arrive where the next barrier is worth spending.
+        """
+        here = observation.own_position
+        return min(
+            moves,
+            key=lambda one: (
+                -self._best_cut(observation, target, destination_of(here, one)),
+                _distance(destination_of(here, one), target),
+                one.value,
+            ),
+        )
+
+    def _best_cut(self, observation: Observation, target: Position, standing: Position) -> int:
+        """The largest severance any lawful placement from *standing* would make."""
+        cuts = [
+            _severance(observation, target, cell)
+            for cell in observation.board.orthogonal_neighbours(standing)
+            if cell != target and is_placeable(observation.board, standing, cell, observation.quota)
+        ]
+        return max(cuts, default=0)
 
     def _sever(self, observation: Observation, target: Position) -> Position | None:
         """The lawful placement removing most of the evader's region, if any does."""
